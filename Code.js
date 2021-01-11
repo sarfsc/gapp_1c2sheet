@@ -51,8 +51,7 @@ function scanMail() {
             var file_name = file.getName();
             if(file_name.indexOf("1c")>=0 && file_name.indexOf(".txt")>=0){
               data_1c = file.getDataAsString(ENCODING_1C);
-              
-              getData(data_1c.split("СекцияДокумент=Платежное поручение")).forEach((sber_map) => {
+              getData(data_1c.split("СекцияДокумент=")).forEach((sber_map) => {
                 if(sber_map['ПлательщикСчет']){
                   var sum = sber_map['Сумма'];
                   var desk = sber_map['НазначениеПлатежа'];
@@ -75,7 +74,7 @@ function scanMail() {
     msgs[i][0].getThread().addLabel(processed_label);
   }
   if(acc_values.length){
-    sheet.getRange(sheet.getLastRow()+1, 3, acc_values.length, 1).setNumberFormat('yyyy-mm-dd');
+    sheet.getRange(sheet.getLastRow(), 3, acc_values.length+1, 1).setNumberFormat('yyyy-mm-dd');
     sheet.getRange(sheet.getLastRow()+1, 1, acc_values.length, 4).setValues(acc_values);
     sheet.getRange(6, 1, sheet.getLastRow(), 4).removeDuplicates().sort(3);
   }
