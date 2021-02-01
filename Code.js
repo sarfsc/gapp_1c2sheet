@@ -75,8 +75,8 @@ function scanMail() {
   }
   if(acc_values.length){
     sheet.getRange(sheet.getLastRow(), 3, acc_values.length+1, 1).setNumberFormat('yyyy-mm-dd');
+    sheet.getRange(sheet.getLastRow(), 2, acc_values.length+1, 1).setNumberFormat('#,##0.00[$ ₽]');
     sheet.getRange(sheet.getLastRow()+1, 1, acc_values.length, 4).setValues(acc_values);
     sheet.getRange(6, 1, sheet.getLastRow(), 4).removeDuplicates().sort(3);
   }
-
 };
